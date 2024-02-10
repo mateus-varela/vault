@@ -27,7 +27,7 @@ jobs:
           ECR_REPOSITORY: mvarela-io/vaultwarden
           IMAGE_TAG: "vault-$(date +%Y%m%d)-${{ github.sha }}"
         run: |
-          docker build --file Dockerfile --tag $IMAGE_TAG .
+          docker build . --file Dockerfile --tag $IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "IMAGE $IMAGE_TAG is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
           echo "image_tag=$IMAGE_TAG" 
