@@ -11,13 +11,16 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Configure AWS credentials and Login ECR
-        id: login-ecr
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
           aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
           aws-region: us-east-1
 
+      - name: Login ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        
       - name: Set up environment variables
         run: |
           echo "ECR_REGISTRY=${{ steps.login-ecr.outputs.registry }}" >> $GITHUB_ENV
