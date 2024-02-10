@@ -1,0 +1,35 @@
+name: 'Terraform'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
+        aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
+        aws-region: us-east-1
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_wrapper: false
+
+    - name: Terraform Init
+      run: terraform init
+
+
+    - name: Terraform Plan
+      run: terraform plan -input=false
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve -input=false
