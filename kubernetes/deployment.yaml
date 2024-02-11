@@ -22,7 +22,7 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: data
-              mountPath: /vw-data
+              mountPath: /data
           env:
             - name: ADMIN_TOKEN
               value: 0_[hZ</%&lyog9d8u-D6../d1`\u;-L'
