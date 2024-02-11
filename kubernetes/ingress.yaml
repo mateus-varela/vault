@@ -21,4 +21,4 @@ spec:
   tls:
     - hosts:
         - vault.mvarela.io
-      secretName: letsencrypt2
+      secretName: letsencrypt

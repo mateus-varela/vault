@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: vaultwarden-cert2
+  name: vaultwarden-cert
   namespace: vaultwarden
 spec:
-  secretName: letsencrypt2
+  secretName: letsencrypt
   issuerRef:
     name: letsencrypt 
     kind: ClusterIssuer
