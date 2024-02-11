@@ -62,6 +62,7 @@ module "KUBE-PROMETHEUS-STACK" {
     force_update     = true
     wait             = true
     recreate_pods    = true
+    chart            = "kube-prometheus-stack"
     timeout          = var.timeout_seconds
   }
 }
