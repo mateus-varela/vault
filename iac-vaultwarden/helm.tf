@@ -48,8 +48,24 @@ module "ARGOCD" {
   }
 
   values = [file("./_modules/helm-release/argocd-values.yaml")]
-
 }
+
+module "KUBE-PROMETHEUS-STACK" {
+  source = "./_modules/helm-release"
+
+  namespace  = "monitoring"
+  repository = "https://prometheus-community.github.io/helm-charts"
+
+  app = {
+    create_namespace = true
+    name             = "kube-prometheus-stack"
+    force_update     = true
+    wait             = true
+    recreate_pods    = true
+    timeout          = var.timeout_seconds
+  }
+}
+
 # # helm install argocd -n argocd -f values/argocd.yaml
 # # k port-forward svc/argocd-server -n argocd 8080:80
 # # k get secrets argocd-initial-admin-secret -o yaml -n argocd
