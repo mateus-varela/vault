@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden-deployment
+  namespace: vaultwarden
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vaultwarden
+  template:
+    metadata:
+      labels:
+        app: vaultwarden
+    spec:
+      imagePullSecrets:
+      - name: secret-registry
+      containers:
+        - name: vaultwarden
+          image: 878893543361.dkr.ecr.us-east-1.amazonaws.com/mvarela-io/vaultwarden:4d77382f5fa4b8d2c16477f977e62673013348ea
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: data
+              mountPath: /vw-data
+          env:
+            - name: ADMIN_TOKEN
+              value: 0_[hZ</%&lyog9d8u-D6../d1`\u;-L'
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: vaultwarden-pvc
